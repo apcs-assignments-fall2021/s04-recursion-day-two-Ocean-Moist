@@ -47,7 +47,14 @@ public class MyMain {
     // countBigDigits(521931) => 2
     public static int countBigDigits(int x) {
         // YOUR CODE HERE
-        return -1;
+        if (x == 0) {
+            return 0;
+        }
+        else if (x % 10 >= 5) {
+            return 1 + countBigDigits(x / 10);
+        } else {
+            return countBigDigits(x / 10);
+        }
     }
 
     // Write a method that uses recursion to calculate whether
@@ -65,7 +72,19 @@ public class MyMain {
     // moreOddThanEven(521931) => true because 5 odd and 1 even
     public static boolean moreOddThanEven(int x) {
         // YOUR CODE HERE
-        return false;
+        return moreOddThanEvenTR(x, 0, 0);
+    }
+
+    public static boolean moreOddThanEvenTR(int x, int odd, int even) {
+        if (x == 0) {
+            return odd > even;
+        } else {
+            if (x % 10 % 2 == 0) {
+                return moreOddThanEvenTR(x / 10, odd, even + 1);
+            } else {
+                return moreOddThanEvenTR(x / 10, odd + 1, even);
+            }
+        }
     }
 
     // This might be helpful to get started:
@@ -82,7 +101,13 @@ public class MyMain {
     // isPalindrome("racecars") => false
     public static boolean isPalindrome(String str) {
         // YOUR CODE HERE
-        return false;
+        if (str.length() == 1 || str.length() == 0) {
+            return true;
+        } else if (str.charAt(0) == str.charAt(str.length() - 1)) {
+            return isPalindrome(str.substring(1,str.length() - 1));
+        } else {
+            return false;
+        }
     }
 
 
@@ -99,7 +124,11 @@ public class MyMain {
     // countBigDigits(521931) => 21
     public static int addDigits(int x) {
         // YOUR CODE HERE
-        return -1;
+        if (x < 10) {
+            return x;
+        } else {
+            return x % 10 + addDigits(x / 10);
+        }
     }
 
     // Write a method that is given a String containing a single pair
@@ -113,7 +142,15 @@ public class MyMain {
     // parenTrim("(xy)1") => "(xy)"
     public static String parenTrim(String str) {
         // YOUR CODE HERE
-        return "";
+        if (str.charAt(0) == '(' && str.charAt(str.length() - 1) == ')') {
+            return str;
+        } else if (str.charAt(0) == '(') {
+            return parenTrim(str.substring(0, str.length() - 1));
+        } else if (str.charAt(str.length() - 1) == ')') {
+            return parenTrim(str.substring(1));
+        } else {
+            return parenTrim(str.substring(1, str.length() - 1));
+        }
     }
 
     // This method returns the orignal string reversed;
@@ -123,7 +160,11 @@ public class MyMain {
     // reverse("racecar") => racecar
     public static String reverse(String str) {
         // YOUR CODE HERE
-        return "";
+        if (str.length() == 0) {
+            return "";
+        } else {
+            return reverse(str.substring(1)) + str.charAt(0);
+        }
     }
 
 
